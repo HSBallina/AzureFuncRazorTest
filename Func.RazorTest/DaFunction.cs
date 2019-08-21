@@ -9,7 +9,7 @@ namespace Func.RazorTest
 {
 	public static class DaFunction
 	{
-		[FunctionName("Function1")]
+		[FunctionName("DaFunction")]
 		public static async Task<IActionResult> Run(
 			[HttpTrigger(AuthorizationLevel.Function, "get", Route = "dafunction")] HttpRequest req)
 		{
@@ -21,7 +21,7 @@ namespace Func.RazorTest
 			}
 
 			var engine = new RazorLightEngineBuilder()
-				.UseMemoryCachingProvider()
+				.SetOperatingAssembly(typeof(DaFunction).Assembly)
 				.Build();
 
 			const string Template = "Hello, @Model.Name. Welcome to RazorLight repository";
